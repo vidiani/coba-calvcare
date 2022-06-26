@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "543429581746",
+    "project_id": "calvcare-95205",
+    "storage_bucket": "calvcare-95205.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:543429581746:android:ca5704ea6295e2f1f522ab",
+        "android_client_info": {
+          "package_name": "com.toko.calvcare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "543429581746-iiblkheb7lsrlnlkq3iqho0hm7iqn08r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNQ6x_32kuRkGRIOWUiiXlE2AHMptEHh0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "543429581746-iiblkheb7lsrlnlkq3iqho0hm7iqn08r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
