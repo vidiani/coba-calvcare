@@ -12,7 +12,7 @@ class DetailChatPage extends StatefulWidget {
   DetailChatPage(this.product);
 
   @override
-  _DetailChatPageState createState() => _DetailChatState();
+  _DetailChatPageState createState() => _DetailChatPageState();
 }
 
 class _DetailChatPageState extends State<DetailChatPage> {
@@ -30,7 +30,7 @@ class _DetailChatPageState extends State<DetailChatPage> {
         message: messageController.text,
       );
       setState(() {
-        widget.product = UninitializedProductModel();
+        widget.product = UnintializeProductModel();
         messageController.text = '';
       });
     }
@@ -126,7 +126,7 @@ class _DetailChatPageState extends State<DetailChatPage> {
             ),
             GestureDetector(
               onTap: () {
-                widget.product = UninitializedProductModel();
+                widget.product = product;
               },
               child: Image.asset(
                 'assets/button_close.png',
@@ -145,8 +145,8 @@ class _DetailChatPageState extends State<DetailChatPage> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            product is UninitializedProductModel
-                ? SizedBox()
+            widget.product is UnintializeProductModel
+                ? const SizedBox()
                 : productPreview(),
             Row(
               children: [
@@ -189,8 +189,8 @@ class _DetailChatPageState extends State<DetailChatPage> {
 
     Widget content() {
       return StreamBuilder<List<MessageModel>>(
-          stream:
-              MessageService().getMessageByUserId(userId: authProvider.user.id),
+          stream: MessageService()
+              .getMessageByUserId(userId: authProvider.user.id ?? 0),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return ListView(
@@ -199,14 +199,14 @@ class _DetailChatPageState extends State<DetailChatPage> {
                 ),
                 children: snapshot.data!
                     .map((MessageModel message) => chatBubble(
-                          isSender: message.isFormUser,
-                          text: message.message,
-                          product: message.product,
+                          isSender: message.isFormUser ?? false,
+                          text: message.message ?? '',
+                          product: message.product ?? UnintializeProductModel(),
                         ))
                     .toList(),
               );
             } else {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             }

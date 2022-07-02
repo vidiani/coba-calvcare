@@ -1,59 +1,38 @@
+import 'package:calvcare/entity/product_entity.dart';
 import 'package:calvcare/models/category_model.dart';
-import 'package:calvcare/models/gallery_model.dart';
 
-class ProductModel {
-  final int id;
-  final String name;
-  final double price;
-  final String description;
-  final String tags;
-  final CategoryModel category;
-  final DateTime createdAt;
-  final DateTime updatedAt;
-  List<GalleryModel> galleries;
-  
+class ProductModel extends Product {
+  const ProductModel(
+      {int? id,
+      String? name,
+      double? price,
+      String? description,
+      String? tags,
+      CategoryModel? category,
+      DateTime? createdAt,
+      DateTime? updatedAt})
+      : super(
+            id: id,
+            name: name,
+            price: price,
+            description: description,
+            tags: tags,
+            category: category,
+            createdAt: createdAt,
+            updatedAt: updatedAt);
 
-  ProductModel({
-    required this.id,
-    required this.name,
-    required this.price,
-    required this.description,
-    required this.tags,
-    required this.category,
-    required this.createdAt,
-    required this.updatedAt,
-    required this.galleries,
-  });
-
-  factory ProductModel.fromJson(Map<String, dynamic> json) {
+  factory ProductModel.fromJson(dynamic json) {
+    const empty = null;
     return ProductModel(
-    id: json['id'],
-    name: json['name'],
-    price: double.parse(json['price'].toString()),
-    description: json['description'],
-    tags: json['tags'],
-    category: CategoryModel.fromJson(json['category']),
-    galleries: json['galleries']
-        .map<GalleryModel>[(gallery) => GalleryModel.fromJson(gallery)]
-        .toList(),
-    createdAt: DateTime.parse(json['created_at']),
-    updatedAt: DateTime.parse(json['updated_at']),
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'name': name,
-      'price': price,
-      'description': description,
-      'tags': tags,
-      'category': category.toJson(),
-      'galleries': galleries.map((gallery) => gallery.toJson()).toList(),
-      'created_at': createdAt.toString(),
-      'updated_at': updatedAt.toString(),
-    };
+        id: json['id'] ?? empty,
+        name: json['name'] ?? empty,
+        price: json['price'] ?? empty,
+        description: json['description'] ?? empty,
+        tags: json['tags'] ?? empty,
+        category: json['category'] ?? empty,
+        createdAt: json['createdAt'] ?? empty,
+        updatedAt: json['updatedAt'] ?? empty);
   }
 }
 
-class UninitializedProductModel extends ProductModel{}
+class UnintializeProductModel extends ProductModel {}

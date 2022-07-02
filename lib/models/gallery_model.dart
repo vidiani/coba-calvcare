@@ -1,25 +1,10 @@
-class GalleryModel {
-  final int id;
-  final String url;
+import 'package:calvcare/entity/gallery_entity.dart';
 
-  GalleryModel({
-    required this.id,
-    required this.url,
-  });
+class GalleryModel extends Gallery {
+  const GalleryModel({int? id, String? url}) : super(id: id, url: url);
 
-  factory GalleryModel.fronJson(Map<String, dynamic> json) {
-    return GalleryModel(
-      id: json['id'],
-      url: json['url'],
-    );
+  factory GalleryModel.fromJson(dynamic json) {
+    const empty = null;
+    return GalleryModel(id: json['id'] ?? empty, url: json['url'] ?? empty);
   }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'url': url,
-    };
-  }
-
-  static fromJson(gallery) {}
 }

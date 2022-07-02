@@ -86,7 +86,7 @@ class _ProductPageState extends State<ProductPage> {
                   'Item added successfully',
                   style: secondaryTextStyle,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Container(
@@ -183,10 +183,10 @@ class _ProductPageState extends State<ProductPage> {
             ),
           ),
           CarouselSlider(
-            items: widget.product.galleries
+            items: widget.product.galleries!
                 .map(
                   (image) => Image.network(
-                    image.url,
+                    image.url ?? "",
                     width: MediaQuery.of(context).size.width,
                     height: 310,
                     fit: BoxFit.cover,
@@ -201,12 +201,12 @@ class _ProductPageState extends State<ProductPage> {
                   });
                 }),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: widget.product.galleries.map((e) {
+            children: widget.product.galleries!.map((e) {
               index++;
               return indicator(index);
             }).toList(),
@@ -219,9 +219,9 @@ class _ProductPageState extends State<ProductPage> {
       int index = -1;
       return Container(
         width: double.infinity,
-        margin: EdgeInsets.only(top: 17),
+        margin: const EdgeInsets.only(top: 17),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.vertical(
+          borderRadius: const BorderRadius.vertical(
             top: Radius.circular(24),
           ),
           color: backgroundColor1,
@@ -241,14 +241,14 @@ class _ProductPageState extends State<ProductPage> {
                     child: Column(
                       children: [
                         Text(
-                          widget.product.name,
+                          widget.product.name ?? "",
                           style: primaryTextStyle.copyWith(
                             fontSize: 18,
                             fontWeight: semiBold,
                           ),
                         ),
                         Text(
-                          widget.product.category.name,
+                          widget.product.category!.name ?? "",
                           style: secondaryTextStyle.copyWith(
                             fontSize: 12,
                           ),
@@ -263,7 +263,7 @@ class _ProductPageState extends State<ProductPage> {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             backgroundColor: secondaryColor,
-                            content: Text(
+                            content: const Text(
                               'Has been added to the Wishlist',
                               textAlign: TextAlign.center,
                             ),
@@ -273,7 +273,7 @@ class _ProductPageState extends State<ProductPage> {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             backgroundColor: alertColor,
-                            content: Text(
+                            content: const Text(
                               'Has been removed to the Wishlist',
                               textAlign: TextAlign.center,
                             ),
@@ -344,7 +344,7 @@ class _ProductPageState extends State<ProductPage> {
                     height: 12,
                   ),
                   Text(
-                    widget.product.description,
+                    widget.product.description ?? '',
                     style: subtitleTextStyle.copyWith(
                       fontWeight: light,
                     ),

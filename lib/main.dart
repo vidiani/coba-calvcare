@@ -17,12 +17,11 @@ import 'package:calvcare/providers/wishlist_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  runApp(MyApp());
+  await Firebase.initializeApp(name: defaultFirebaseAppName);
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {

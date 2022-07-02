@@ -1,30 +1,19 @@
-import 'package:calvcare/models/product_model.dart';
+import 'package:calvcare/entity/cart_entity.dart';
 
-class CartModel {
-  final int id;
-  final ProductModel product;
-  late final int quantity;
+class CartModel extends Cart {
+  const CartModel({
+    int? id,
+    dynamic product,
+    int? quantity,
+  }) : super(id: id, product: product, quantity: quantity);
 
-  CartModel({
-    required this.id,
-    required this.product,
-    required this.quantity,
-  });
-
-  factory CartModel.fromJson(Map<String, dynamic> json) {
+  factory CartModel.fromJson(dynamic json) {
+    const empty = null;
     return CartModel(
-      id: json['id'],
-      product: ProductModel.fromJson(json['product']),
-      quantity: json['quantity'],
+      id: json['id'] ?? empty,
+      product: json['product'] ?? [],
+      quantity: json['quantity'] ?? empty,
     );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'product': product.toJson(),
-      'quantity': quantity,
-    };
   }
 
   double getTotalPrice() {

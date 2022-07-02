@@ -1,23 +1,10 @@
-class CategoryModel {
-  final int id;
-  final String name;
+import 'package:calvcare/entity/category_entity.dart';
 
-  CategoryModel({
-    required this.id,
-    required this.name,
-  });
+class CategoryModel extends Category {
+  const CategoryModel({int? id, String? name}) : super(id: id, name: name);
 
-  factory CategoryModel.fromJson(Map<String, dynamic> json) {
-    return CategoryModel(
-      id: json['id'],
-      name: json['name'],
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'name': name,
-    };
+  factory CategoryModel.fromJson(dynamic json) {
+    const empty = null;
+    return CategoryModel(id: json['id'] ?? empty, name: json['name'] ?? empty);
   }
 }

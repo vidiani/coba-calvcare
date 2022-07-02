@@ -28,13 +28,13 @@ class _CheckoutPageState extends State<CheckoutPage> {
       });
 
       if (await transactionProvider.checkout(
-        authProvider.user.token,
+        authProvider.user.token ?? '',
         cartProvider.carts,
         cartProvider.totalPrice(),
       )) {
         cartProvider.carts = [];
-        var pushAndRemoveUntil = Navigator.pushAndRemoveUntil(
-            context, '/checkout-success', (route) => false);
+        // var pushAndRemoveUntil = Navigator.pushAndRemoveUntil(
+        //     context, '/checkout-success', (route) => false);
       }
 
       setState(() {

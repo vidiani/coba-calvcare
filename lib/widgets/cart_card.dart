@@ -64,7 +64,7 @@ class CartCard extends StatelessWidget {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      cartProvider.addQuantity(cart.id);
+                      cartProvider.addQuantity(cart.id!);
                     },
                     child: Image.asset(
                       'assets/button_tambah.png',
@@ -85,7 +85,7 @@ class CartCard extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
-                      cartProvider.reduceQuantity(cart.id);
+                      cartProvider.reduceQuantity(cart.id!);
                     },
                     child: Image.asset(
                       'assets/button_kurang.png',
@@ -101,7 +101,7 @@ class CartCard extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              cartProvider.removeCart(cart.id);
+              cartProvider.removeCart(cart.id!);
             },
             child: Row(
               children: [

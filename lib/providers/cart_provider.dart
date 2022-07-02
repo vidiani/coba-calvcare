@@ -15,7 +15,7 @@ class CartProvider with ChangeNotifier {
     if (productExist(product)) {
       int index =
           _carts.indexWhere((element) => element.product.id == product.id);
-      _carts[index].quantity++;
+      _carts[index].quantity! + 1;
     } else {
       _carts.add(
         CartModel(
@@ -34,12 +34,12 @@ class CartProvider with ChangeNotifier {
   }
 
   addQuantity(int id) {
-    _carts[id].quantity++;
+    _carts[id].quantity! + 1;
     notifyListeners();
   }
 
   reduceQuantity(int id) {
-    _carts[id].quantity--;
+    _carts[id].quantity! - 1;
     if (_carts[id].quantity == 0) {
       _carts.removeAt(id);
     }
@@ -49,7 +49,7 @@ class CartProvider with ChangeNotifier {
   totalItems() {
     int total = 0;
     for (var item in _carts) {
-      total += item.quantity;
+      total += item.quantity ?? 0;
     }
     return total;
   }
@@ -57,13 +57,14 @@ class CartProvider with ChangeNotifier {
   totalPrice() {
     double total = 0;
     for (var item in _carts) {
-      total += (item.quantity * item.product.price);
+      total += (item.quantity! * item.product.price);
     }
     return total;
   }
 
   productExist(ProductModel product) {
-    if (_carts.indexWhere((element) => element.product.id == product.id) - 1) {
+    if (_carts.indexWhere((element) => element.product.id == product.id) ==
+        -1) {
       return false;
     } else {
       return true;

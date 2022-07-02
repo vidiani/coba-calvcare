@@ -7,7 +7,7 @@ import 'package:firebase_core/firebase_core.dart';
 class MessageService {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  Stream<List<MessageModel>> getMessageByUserId({int userId}) {
+  Stream<List<MessageModel>> getMessageByUserId({int? userId}) {
     try {
       return firestore
           .collection('messages')
@@ -21,7 +21,8 @@ class MessageService {
 
         result.sort(
           (MessageModel a, MessageModel b) =>
-              a.createdAt.compareTo(b.createdAt),
+              a.createdAt?.compareTo(b.createdAt!) ??
+              int.parse(DateTime.now().toString()),
         );
 
         return result;
@@ -32,22 +33,21 @@ class MessageService {
   }
 
   Future<void> addMessage(
-      {UserModel user,
-      bool isFormUser,
-      String message,
-      ProductModel product}) async {
+      {UserModel? user,
+      bool? isFormUser,
+      String? message,
+      ProductModel? product}) async {
     try {
       firestore.collection('messages').add({
-        'userId': user.id,
-        'userName': user.name,
-        'userImage': user.profilePhotoUrl,
+        'userId': user?.id,
+        'userName': user?.name,
+        'userImage': user?.profilePhotoUrl,
         'isFromUser': isFormUser,
         'message': message,
-        'product': product is UninitializedProductModel ? {} : product.toJson(),
+        'product': product is UnintializeProductModel ? {} : product?.toJson(),
         'createdAt': DateTime.now().toString(),
         'updatedAt': DateTime.now().toString(),
-      });
-      then(
+      }).then(
         (value) => print('Pesan Berhasil Dikirim!'),
       );
     } catch (e) {

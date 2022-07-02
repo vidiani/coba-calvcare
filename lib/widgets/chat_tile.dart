@@ -15,7 +15,7 @@ class ChatTile extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) => DetailChatPage(
-              UninitializedProductModel(),
+              UnintializeProductModel(),
             ),
           ),
         );
@@ -44,7 +44,7 @@ class ChatTile extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        message.message,
+                        message.message!,
                         style: secondaryTextStyle.copyWith(
                           fontWeight: light,
                         ),
