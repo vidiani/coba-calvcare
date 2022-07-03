@@ -1,4 +1,4 @@
-package com.example.calvcare
+package com.toko.calvcare
 
 import io.flutter.embedding.android.FlutterActivity
 

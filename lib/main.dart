@@ -1,3 +1,4 @@
+import 'package:calvcare/firebase_options.dart';
 import 'package:calvcare/pages/cart.page.dart';
 import 'package:calvcare/pages/checkout_page.dart';
 import 'package:calvcare/pages/checkout_success_page.dart';
@@ -20,7 +21,7 @@ import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(name: defaultFirebaseAppName);
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
 }
 
