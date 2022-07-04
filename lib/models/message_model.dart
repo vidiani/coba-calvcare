@@ -1,5 +1,6 @@
 import 'package:calvcare/entity/message_entity.dart';
 import 'package:calvcare/models/product_model.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class MessageModel extends Message {
   const MessageModel(
@@ -22,6 +23,11 @@ class MessageModel extends Message {
             updatedAt: updatedAt);
 
   factory MessageModel.fromJson(dynamic json) {
+    parseDate(Timestamp date) {
+      final dateTime = Timestamp(date.seconds, date.nanoseconds).seconds;
+      return DateTime.fromMillisecondsSinceEpoch(dateTime * 1000);
+    }
+
     const empty = null;
     return MessageModel(
         message: json['message'] ?? empty,
@@ -29,8 +35,8 @@ class MessageModel extends Message {
         userName: json['userName'] ?? empty,
         userImage: json['userImage'] ?? empty,
         isFormUser: json['isFormUser'] ?? empty,
-        product: json['product'] ?? empty,
-        createdAt: json['createdAt'] ?? empty,
-        updatedAt: json['updatedAt'] ?? empty);
+        product: ProductModel.fromJson(json['product']),
+        createdAt: parseDate(json['createdAt']),
+        updatedAt: parseDate(json['updatedAt']));
   }
 }

@@ -25,9 +25,9 @@ class Product extends Equatable {
       this.galleries});
 
   Map<String, dynamic> toJson() {
-    var galleries = [];
-    for (Gallery gallery in galleries) {
-      galleries.add({
+    var galleriesJson = [];
+    for (Gallery gallery in galleries!) {
+      galleriesJson.add({
         'id': gallery.id,
         'products_id': gallery.productId,
         'url': gallery.url
@@ -39,10 +39,10 @@ class Product extends Equatable {
       'price': price,
       'description': description,
       'tags': tags,
-      'category': category,
+      'category': category?.toJson(),
       'createdAt': createdAt,
       'updatedAt': updatedAt,
-      'galleries': galleries
+      'galleries': galleriesJson
     };
   }
 
@@ -53,5 +53,5 @@ class Product extends Equatable {
 
   @override
   List<Object?> get props =>
-      [id, name, price, description, tags, category, createdAt, updatedAt];
+      [id, name, price, description, tags, category, createdAt, updatedAt, galleries];
 }

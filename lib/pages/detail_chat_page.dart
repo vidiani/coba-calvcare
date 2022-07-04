@@ -30,8 +30,8 @@ class _DetailChatPageState extends State<DetailChatPage> {
         message: messageController.text,
       );
       setState(() {
-        widget.product = UnintializeProductModel();
         messageController.text = '';
+        widget.product = UnintializeProductModel();
       });
     }
 
@@ -76,7 +76,7 @@ class _DetailChatPageState extends State<DetailChatPage> {
     }
 
     Widget productPreview() {
-      var product;
+      var product = widget.product;
       return Container(
         width: 225,
         height: 74,
@@ -95,8 +95,8 @@ class _DetailChatPageState extends State<DetailChatPage> {
             ClipRRect(
               borderRadius: BorderRadius.circular(12),
               child: Image.network(
-                product.galleries[0].url,
-                width: 54,
+                product.galleries?[0].url ?? '',
+                width: 50,
               ),
             ),
             SizedBox(
@@ -108,7 +108,7 @@ class _DetailChatPageState extends State<DetailChatPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    product.name,
+                    product.name!,
                     style: primaryTextStyle,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -126,7 +126,9 @@ class _DetailChatPageState extends State<DetailChatPage> {
             ),
             GestureDetector(
               onTap: () {
-                widget.product = product;
+                setState(() {
+                  widget.product = product;
+                });
               },
               child: Image.asset(
                 'assets/button_close.png',
@@ -189,27 +191,27 @@ class _DetailChatPageState extends State<DetailChatPage> {
 
     Widget content() {
       return StreamBuilder<List<MessageModel>>(
-          stream: MessageService()
-              .getMessageByUserId(userId: authProvider.user.id ?? 0),
+          stream:
+              MessageService().getMessageByUserId(userId: authProvider.user.id),
           builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return ListView(
-                padding: EdgeInsets.symmetric(
-                  horizontal: defaultMargin,
-                ),
-                children: snapshot.data!
-                    .map((MessageModel message) => chatBubble(
-                          isSender: message.isFormUser ?? false,
-                          text: message.message ?? '',
-                          product: message.product ?? UnintializeProductModel(),
-                        ))
-                    .toList(),
-              );
-            } else {
+            print('error: ${snapshot.error}');
+            if (!snapshot.hasData) {
               return const Center(
                 child: CircularProgressIndicator(),
               );
             }
+            return ListView(
+              padding: EdgeInsets.symmetric(
+                horizontal: defaultMargin,
+              ),
+              children: snapshot.data!
+                  .map((MessageModel message) => chatBubble(
+                        isSender: message.isFormUser ?? false,
+                        text: message.message ?? '',
+                        product: message.product ?? UnintializeProductModel(),
+                      ))
+                  .toList(),
+            );
           });
     }
 
@@ -217,6 +219,7 @@ class _DetailChatPageState extends State<DetailChatPage> {
       backgroundColor: backgroundColor3,
       appBar: header(),
       bottomNavigationBar: chatInput(),
+      body: content(),
     );
   }
 }

@@ -2,7 +2,6 @@ import 'package:calvcare/models/message_model.dart';
 import 'package:calvcare/models/product_model.dart';
 import 'package:calvcare/models/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 class MessageService {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -14,20 +13,17 @@ class MessageService {
           .where('userId', isEqualTo: userId)
           .snapshots()
           .map((QuerySnapshot list) {
-        var result = list.docs.map<MessageModel>((DocumentSnapshot message) {
-          print(message.data());
+        var result = list.docs.map((DocumentSnapshot message) {
           return MessageModel.fromJson(message.data());
         }).toList();
 
-        result.sort(
-          (MessageModel a, MessageModel b) =>
-              a.createdAt?.compareTo(b.createdAt!) ??
-              int.parse(DateTime.now().toString()),
-        );
+        result.sort((MessageModel a, MessageModel b) =>
+            (a.createdAt?.compareTo(b.createdAt!))!);
 
         return result;
       });
     } catch (e) {
+      print('kenapa error: $e');
       throw Exception(e);
     }
   }
@@ -45,8 +41,8 @@ class MessageService {
         'isFromUser': isFormUser,
         'message': message,
         'product': product is UnintializeProductModel ? {} : product?.toJson(),
-        'createdAt': DateTime.now().toString(),
-        'updatedAt': DateTime.now().toString(),
+        'createdAt': DateTime.now(),
+        'updatedAt': DateTime.now(),
       }).then(
         (value) => print('Pesan Berhasil Dikirim!'),
       );

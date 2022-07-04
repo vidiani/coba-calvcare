@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:html';
 import 'package:calvcare/models/product_model.dart';
-import 'package:calvcare/models/user_model.dart';
 import 'package:http/http.dart' as http;
 
 class ProductService {
@@ -11,11 +10,10 @@ class ProductService {
     var url = '$baseUrl/products';
     var headers = {'Content-Type': 'application/json'};
     var response = await http.get(Uri.parse(url), headers: headers);
-    print(response.body);
     if (response.statusCode == 200) {
       List data = jsonDecode(response.body)['data']['data'];
       List<ProductModel> products = [];
-
+      
       for (var item in data) {
         products.add(ProductModel.fromJson(item));
       }

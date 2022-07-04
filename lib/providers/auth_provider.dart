@@ -3,8 +3,8 @@ import 'package:calvcare/services/auth_service.dart';
 import 'package:flutter/material.dart';
 
 class AuthProvider with ChangeNotifier {
-  late UserModel _user;
-  UserModel get user => _user;
+  UserModel? _user;
+  UserModel get user => _user!;
 
   set user(UserModel user) {
     _user = user;
@@ -37,7 +37,7 @@ class AuthProvider with ChangeNotifier {
     password,
   }) async {
     try {
-      UserModel user = await AuthService().login(
+      final user = await AuthService().login(
         email: email,
         password: password,
       );
