@@ -94,12 +94,7 @@ class _ProductPageState extends State<ProductPage> {
                   height: 44,
                   child: TextButton(
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => DetailChatPage(widget.product),
-                        ),
-                      );
+                      Navigator.pushNamed(context, '/cart');
                     },
                     style: TextButton.styleFrom(
                       backgroundColor: primaryColor,
@@ -401,7 +396,12 @@ class _ProductPageState extends State<ProductPage> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      Navigator.pushNamed(context, '/detail-chat');
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DetailChatPage(widget.product),
+                        ),
+                      );
                     },
                     child: Container(
                       width: 54,

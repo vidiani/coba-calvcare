@@ -13,7 +13,9 @@ class AuthService {
     password,
   }) async {
     var url = '$basedUrl/register';
-    var headers = {'Content-Type': 'application/json'};
+    var headers = {
+      'Content-Type': 'application/json',
+    };
     var body = jsonEncode({
       'name': name,
       'username': username,
@@ -63,7 +65,6 @@ class AuthService {
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body)['data'];
       UserModel user = UserModel.fromJson(data['user']);
-      
 
       return user;
     } else {

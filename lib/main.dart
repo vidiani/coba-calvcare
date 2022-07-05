@@ -61,7 +61,7 @@ class MyApp extends StatelessWidget {
           '/edit-profile': (context) => EditProfilePage(),
           '/cart': (context) => CartPage(),
           '/checkout': (context) => CheckoutPage(),
-          '/checkout-success': (context) => CheckoutSuccessPage(),
+          '/checkoutsuccess': (context) => CheckoutSuccessPage(),
         },
       ),
     );

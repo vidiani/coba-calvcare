@@ -33,8 +33,8 @@ class _CheckoutPageState extends State<CheckoutPage> {
         cartProvider.totalPrice(),
       )) {
         cartProvider.carts = [];
-        // var pushAndRemoveUntil = Navigator.pushAndRemoveUntil(
-        //     context, '/checkout-success', (route) => false);
+        Navigator.pushNamedAndRemoveUntil(
+            context, '/checkoutsuccess', (route) => false);
       }
 
       setState(() {
