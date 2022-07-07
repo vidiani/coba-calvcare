@@ -1,3 +1,5 @@
+import 'package:calvcare/entity/user_entity.dart';
+import 'package:calvcare/models/user_model.dart';
 import 'package:calvcare/providers/auth_provider.dart';
 import 'package:calvcare/providers/cart_provider.dart';
 import 'package:calvcare/providers/transaction_provider.dart';
@@ -21,6 +23,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
     TransactionProvider transactionProvider =
         Provider.of<TransactionProvider>(context);
     AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    UserModel user = authProvider.user;
 
     handleCheckout() async {
       setState(() {
@@ -31,6 +34,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
         authProvider.user.token ?? '',
         cartProvider.carts,
         cartProvider.totalPrice(),
+        authProvider.user.street ?? '',
       )) {
         cartProvider.carts = [];
         Navigator.pushNamedAndRemoveUntil(
@@ -153,7 +157,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                           ),
                         ),
                         Text(
-                          'Swasembada',
+                          user.street?.toString() ?? '',
                           style: primaryTextStyle.copyWith(
                             fontWeight: medium,
                           ),
@@ -219,7 +223,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                       ),
                     ),
                     Text(
-                      '${cartProvider.totalPrice()}',
+                      '${cartProvider.subTotal()}',
                       style: primaryTextStyle.copyWith(
                         fontWeight: medium,
                       ),
@@ -239,7 +243,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                       ),
                     ),
                     Text(
-                      'Free',
+                      '10000',
                       style: primaryTextStyle.copyWith(
                         fontWeight: medium,
                       ),

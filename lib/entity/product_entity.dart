@@ -7,6 +7,7 @@ class Product extends Equatable {
   final String? name;
   final double? price;
   final String? description;
+  final int? quantity;
   final String? tags;
   final CategoryModel? category;
   final DateTime? createdAt;
@@ -18,6 +19,7 @@ class Product extends Equatable {
       this.name,
       this.price,
       this.description,
+      this.quantity,
       this.tags,
       this.category,
       this.createdAt,
@@ -38,6 +40,7 @@ class Product extends Equatable {
       'name': name,
       'price': price,
       'description': description,
+      'quantity': quantity,
       'tags': tags,
       'category': category?.toJson(),
       'createdAt': createdAt,
@@ -52,6 +55,16 @@ class Product extends Equatable {
   }
 
   @override
-  List<Object?> get props =>
-      [id, name, price, description, tags, category, createdAt, updatedAt, galleries];
+  List<Object?> get props => [
+        id,
+        name,
+        price,
+        description,
+        quantity,
+        tags,
+        category,
+        createdAt,
+        updatedAt,
+        galleries
+      ];
 }

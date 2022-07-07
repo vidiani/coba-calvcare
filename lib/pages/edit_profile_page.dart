@@ -129,6 +129,37 @@ class EditProfilePage extends StatelessWidget {
       );
     }
 
+    Widget addressInput() {
+      return Container(
+        margin: EdgeInsets.only(
+          top: 30,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Address',
+              style: secondaryTextStyle.copyWith(
+                fontSize: 13,
+              ),
+            ),
+            TextFormField(
+              style: primaryTextStyle,
+              decoration: InputDecoration(
+                hintText: user.street,
+                hintStyle: primaryTextStyle,
+                enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(
+                    color: subtitleColor,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
     Widget content() {
       return Container(
         width: double.infinity,
@@ -157,6 +188,7 @@ class EditProfilePage extends StatelessWidget {
             nameInput(),
             usernameInput(),
             emailInput(),
+            addressInput(),
           ],
         ),
       );

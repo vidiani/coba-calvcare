@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 class AuthProvider with ChangeNotifier {
   UserModel? _user;
+
   UserModel get user => _user!;
 
   set user(UserModel user) {
@@ -14,6 +15,7 @@ class AuthProvider with ChangeNotifier {
   Future<bool> register({
     name,
     username,
+    street,
     email,
     password,
   }) async {
@@ -21,6 +23,7 @@ class AuthProvider with ChangeNotifier {
       UserModel user = await AuthService().register(
         name: name,
         username: username,
+        street: street,
         email: email,
         password: password,
       );

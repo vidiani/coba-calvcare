@@ -9,16 +9,19 @@ class AuthService {
   Future<UserModel> register({
     name,
     username,
+    street,
     email,
     password,
   }) async {
     var url = '$basedUrl/register';
     var headers = {
+      "Access-Control_Allow_Origin": "*",
       'Content-Type': 'application/json',
     };
     var body = jsonEncode({
       'name': name,
       'username': username,
+      'street': street,
       'email': email,
       'password': password,
     });

@@ -1,5 +1,6 @@
 import 'package:calvcare/models/cart_model.dart';
 import 'package:calvcare/models/product_model.dart';
+import 'package:calvcare/models/user_model.dart';
 import 'package:flutter/material.dart';
 
 class CartProvider with ChangeNotifier {
@@ -54,10 +55,18 @@ class CartProvider with ChangeNotifier {
     return total;
   }
 
+  subTotal() {
+    double total = 0;
+    for (var item in _carts) {
+      total += (item.product.price);
+    }
+    return total;
+  }
+
   totalPrice() {
     double total = 0;
     for (var item in _carts) {
-      total += (item.quantity! * item.product.price);
+      total += (item.product.price + 10000);
     }
     return total;
   }

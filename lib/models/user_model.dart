@@ -6,6 +6,7 @@ class UserModel extends User {
       String? name,
       String? email,
       String? username,
+      String? street,
       String? profilePhotoUrl,
       String? token})
       : super(
@@ -13,6 +14,7 @@ class UserModel extends User {
             name: name,
             email: email,
             username: username,
+            street: street,
             profilePhotoUrl: profilePhotoUrl,
             token: token);
 
@@ -22,6 +24,7 @@ class UserModel extends User {
       name: json['name'],
       email: json['email'],
       username: json['username'],
+      street: json['street'],
       profilePhotoUrl: json['profile_photo_url'],
       token: json['token'],
     );

@@ -5,6 +5,7 @@ import 'package:calvcare/pages/checkout_success_page.dart';
 import 'package:calvcare/pages/detail_chat_page.dart';
 import 'package:calvcare/pages/edit_profile_page.dart';
 import 'package:calvcare/pages/home/main_page.dart';
+import 'package:calvcare/pages/mask_page.dart';
 import 'package:calvcare/pages/product_page.dart';
 import 'package:calvcare/pages/sign_in_page.dart';
 import 'package:calvcare/pages/sign_up_page.dart';
@@ -18,6 +19,7 @@ import 'package:calvcare/providers/wishlist_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:calvcare/pages/mask_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -62,6 +64,7 @@ class MyApp extends StatelessWidget {
           '/cart': (context) => CartPage(),
           '/checkout': (context) => CheckoutPage(),
           '/checkoutsuccess': (context) => CheckoutSuccessPage(),
+          '/mask-page': (context) => MaskPage(),
         },
       ),
     );

@@ -5,15 +5,16 @@ import '../models/cart_model.dart';
 class TransactionService {
   String baseUrl = 'http://calvcare-backend.test/api';
 
-  Future<bool> checkout(
-      String token, List<CartModel> carts, double totalPrice) async {
+  Future<bool> checkout(String token, List<CartModel> carts, double totalPrice,
+      String street) async {
     var url = '$baseUrl/checkout';
     var headers = {
-      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin'
+          'Content-Type': 'application/json',
       'Authorization': token,
     };
     var body = jsonEncode({
-      'address': 'Swasembada',
+      'street': street,
       'items': carts
           .map(
             (cart) => {
@@ -24,7 +25,7 @@ class TransactionService {
           .toList(),
       'status': "PENDING",
       'total_price': totalPrice,
-      'shipping_price': 0,
+      'shipping_price': 10.000,
     });
     var response = await http.post(
       Uri.parse(url),

@@ -14,6 +14,7 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController usernameController = TextEditingController(text: '');
   TextEditingController emailController = TextEditingController(text: '');
   TextEditingController passwordController = TextEditingController(text: '');
+  TextEditingController streetController = TextEditingController(text: '');
 
   bool isLoading = false;
 
@@ -28,6 +29,7 @@ class _SignUpPageState extends State<SignUpPage> {
       if (await authProvider.register(
         name: nameController.text,
         username: usernameController.text,
+        street: streetController.text,
         email: emailController.text,
         password: passwordController.text,
       )) {
@@ -76,7 +78,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
     Widget nameInput() {
       return Container(
-        margin: const EdgeInsets.only(top: 50),
+        margin: const EdgeInsets.only(top: 30),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -167,6 +169,58 @@ class _SignUpPageState extends State<SignUpPage> {
                     controller: usernameController,
                     decoration: InputDecoration.collapsed(
                       hintText: 'Your Username',
+                      hintStyle: subtitleTextStyle,
+                    ),
+                  ))
+                ],
+              )),
+            )
+          ],
+        ),
+      );
+    }
+
+    Widget addressInput() {
+      return Container(
+        margin: const EdgeInsets.only(top: 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Address',
+              style: primaryTextStyle.copyWith(
+                fontSize: 16,
+                fontWeight: medium,
+              ),
+            ),
+            const SizedBox(
+              height: 12,
+            ),
+            Container(
+              height: 50,
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16,
+              ),
+              decoration: BoxDecoration(
+                color: backgroundColor2,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Center(
+                  child: Row(
+                children: [
+                  Image.asset(
+                    'assets/icon_address.png',
+                    width: 17,
+                  ),
+                  const SizedBox(
+                    width: 16,
+                  ),
+                  Expanded(
+                      child: TextFormField(
+                    style: primaryTextStyle,
+                    controller: streetController,
+                    decoration: InputDecoration.collapsed(
+                      hintText: 'Your Address',
                       hintStyle: subtitleTextStyle,
                     ),
                   ))
@@ -347,6 +401,7 @@ class _SignUpPageState extends State<SignUpPage> {
               header(),
               nameInput(),
               usernameInput(),
+              addressInput(),
               emailInput(),
               passwordInput(),
               isLoading ? LoadingButton() : signUpButton(),
